@@ -62,6 +62,17 @@ const login = async(req,res) => {
     }
 }
 
+const attendance = async(req,res) => {
+    try {
+        
+    } catch (err) {
+        console.log(err);
+        let resp = responseGenerator(false);
+        res.status(404).json(resp)
+    }
+}
+
+
 // const register = async (req,res) => {
 //     try {
 //         const data = req.body;
@@ -79,6 +90,6 @@ const login = async(req,res) => {
 
 module.exports = {
     login,
-    // register,
+    attendance,
     signup
 }
