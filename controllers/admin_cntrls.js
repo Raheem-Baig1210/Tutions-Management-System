@@ -96,7 +96,6 @@ const attedanceHistory = async(req,res) => {
     try {
         const email = req.body.email
         const history = await attend_Mdl.find({email}).sort({date: 1})
-        console.log(history,history.length)
         if(history.length!=0){
             let resp = responseGenerator(true,"Here is the attendance history of the tutor ...!!!",history)
             res.status(200).json(resp)
@@ -109,6 +108,21 @@ const attedanceHistory = async(req,res) => {
         res.status(404).json(resp)
     }
 }
+
+
+const deleteAttendance = async(req,res) => {
+    try {
+        const userEmail = req.body.email
+        await attend_Mdl.findOneAndDelete({email:userEmail})
+        let resp = responseGenerator(true,"Attendance deleted successfully ...!!!!",attend_Mdl)
+        res.status(200).json(resp)
+    } catch (err) {
+        console.log(err)
+        let resp = responseGenerator(false);
+        res.status(404).json(resp)
+    }
+}
+
 
 
 const register = async(req,res) => {
@@ -132,5 +146,6 @@ module.exports = {
     createCenter,
     deleteUser,
     attedanceList,
-    attedanceHistory
+    attedanceHistory,
+    deleteAttendance
 }

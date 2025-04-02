@@ -10,6 +10,7 @@ router.get("/getUsersList",admin_cntrls.getUsersList)
 router.delete("/removeUser",admin_cntrls.deleteUser)
 router.get("/attendanceList",admin_cntrls.attedanceList)
 router.get("/attendanceHistory",admin_cntrls.attedanceHistory)
+router.delete("/deleteAttendance",admin_cntrls.deleteAttendance)
 
 
 module.exports=router
