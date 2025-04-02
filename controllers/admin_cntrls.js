@@ -37,7 +37,7 @@ const login = async(req,res) => {
 
 const getUsersList = async(req,res) => {
     try {
-        const users = await user_Mdl.find()
+        const users = await user_Mdl.find().populate("center","center location contact -_id")
         let resp = responseGenerator(true,"Here is the List of users ...!!!",users)
         res.status(200).json(resp)
     } catch (err) {
@@ -46,6 +46,25 @@ const getUsersList = async(req,res) => {
         res.status(404).json(resp)
     }
 }
+
+
+const getusersbyCenterid = async(req,res) => {
+    try {
+        const c_id = req.params.id;
+        const users = await user_Mdl.find({center: c_id}).populate("center","center location contact")
+        if(users.length==0){
+            let resp = responseGenerator(false,"No users in this center ...!!!!");
+            res.status(404).json(resp)
+        }
+        let resp = responseGenerator(true,"Here is the list of the users of the given centerId...!!!",users)
+        res.status(200).json(resp)
+    } catch (err) {
+        console.log(err);
+        let resp = responseGenerator(false);
+        res.status(404).json(resp)
+    }
+}
+
 
 const deleteUser = async(req,res) => {
     try {
@@ -71,6 +90,19 @@ const createCenter = async(req,res) => {
         const center = new center_Mdl(data)
         await center.save();
         let resp = responseGenerator(true, "Center created successfully ....!!!", center)
+        res.status(200).json(resp)
+    } catch (err) {
+        console.log(err);
+        let resp = responseGenerator(false);
+        res.status(404).json(resp)
+    }
+}
+
+
+const getallcenters = async(req,res) => {
+    try {
+        const allCenters = await center_Mdl.find().populate()
+        let resp = responseGenerator(true,"Here is the list of centers ...!!!",allCenters)
         res.status(200).json(resp)
     } catch (err) {
         console.log(err);
@@ -147,5 +179,7 @@ module.exports = {
     deleteUser,
     attedanceList,
     attedanceHistory,
-    deleteAttendance
+    deleteAttendance,
+    getallcenters,
+    getusersbyCenterid
 }

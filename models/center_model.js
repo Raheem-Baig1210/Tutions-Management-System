@@ -4,8 +4,9 @@ const schema = mongoose.Schema;
 
 const center_schema = new schema(
     {
-        centerName: {type: String, required: true},
+        center: {type: String, required: true},
         location: {type:String, required:true},
+        contact : {type : Number, required: true},
     },
     {timestamps: true}
 )
