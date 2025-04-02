@@ -8,7 +8,7 @@ const user_schema = new schema(
         id : {type : Number, required: true},
         phno : {type : Number, required: true},
         email : {type : String,required: true},
-        center : {type : String , required : true},
+        centerName : {type : String , required : true},
         timing : {type: String ,required : true},
         password : {type: String, required : true}
     },

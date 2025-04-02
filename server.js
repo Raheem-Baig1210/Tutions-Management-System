@@ -10,6 +10,8 @@ app.use(express.json());
 app.use(require("./routes/route"));
 
 mongoose
-  .connect(process.env.MONGODB_URL)
+  .connect("mongodb://localhost:27017/project-1")
   .then(() => console.log("DB is connected successfully....!!!!"))
   .catch((err) => console.log(err));
+
+  //process.env.MONGODB_URL
