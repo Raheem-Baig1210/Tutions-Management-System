@@ -22,9 +22,13 @@ const generateTokens = (data) => {
     return jwt.sign(data, process.env.SECRET_KEY, {expiresIn:"1d"})
 }
 
+
+
+
+
 module.exports = {
     responseGenerator,
     hashPassword,
     comparePassword,
-    generateTokens
+    generateTokens,
 }

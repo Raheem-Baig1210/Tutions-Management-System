@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const app = express();
 
@@ -10,7 +11,7 @@ app.use(express.json());
 app.use(require("./routes/route"));
 
 mongoose
-  .connect("mongodb://localhost:27017/project-1")
+  .connect(process.env.DB_URL)
   .then(() => console.log("DB is connected successfully....!!!!"))
   .catch((err) => console.log(err));
 
