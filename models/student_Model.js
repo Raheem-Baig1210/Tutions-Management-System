@@ -8,7 +8,9 @@ const student_schema = new schema(
         rollno:{type:Number,required:true},
         age:{type:Number},
         fname:{type:String,required:true},
-        fphno:{type:Number,required:true}
+        fphno:{type:Number,required:true},
+        center:{type:mongoose.Schema.Types.ObjectId, ref: "center",required:true},
+        tutor:{type:mongoose.Schema.Types.ObjectId, ref: "user",required:true}
     },
     {timestamps:true}
 )

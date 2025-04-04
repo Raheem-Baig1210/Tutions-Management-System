@@ -2,6 +2,7 @@ const admin_Mdl = require("../models/admin_model")
 const user_Mdl = require("../models/user_model")
 const center_Mdl = require("../models/center_model")
 const attend_Mdl = require("../models/attend_model")
+const student_Mdl = require("../models/student_Model")
 const { responseGenerator,hashPassword,comparePassword,generateTokens } = require("../utils/util");
 
 
@@ -171,6 +172,42 @@ const register = async(req,res) => {
     }
 }
 
+
+const getAllStudentsAtCenter = async(req,res) => {
+    try {
+        const c_id = req.params.id
+        const students = await student_Mdl.find({center:c_id}).populate("center","center location contact")
+        if(student_Mdl.length==0){
+            let resp = responseGenerator(true,"No students at this center...!!!")
+            res.status(200).json(resp)
+        }
+        let resp = responseGenerator(true,"Here is the list of students that are studing at the given center....!!!!",students)
+        res.status(200).json(resp)
+    } catch (err) {
+        console.log(err)
+        let resp = responseGenerator(false);
+        res.status(404).json(resp)
+    }
+}
+
+const getAllStudentsByTutor = async(req,res) => {
+    try {
+        const t_id = req.params.id
+        const students = await student_Mdl.find({tutor:t_id}).populate("tutor","name email")
+        if(students.length==0){
+            let resp = responseGenerator(true,"No Students under this tutor...!!!")
+            res.status(200).json(resp)
+        }
+        let resp = responseGenerator(true,"Here is the list of the students under  this tutor....!!!!",students)
+        res.status(200).json(resp)
+    } catch (err) {
+        console.log(err)
+        let resp = responseGenerator(false);
+        res.status(404).json(resp)
+    }
+}
+
+
 module.exports = {
     register,
     login,
@@ -181,5 +218,7 @@ module.exports = {
     attedanceHistory,
     deleteAttendance,
     getallcenters,
-    getusersbyCenterid
+    getusersbyCenterid,
+    getAllStudentsAtCenter,
+    getAllStudentsByTutor
 }
