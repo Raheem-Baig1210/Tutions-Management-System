@@ -207,6 +207,21 @@ const getAllStudentsByTutor = async(req,res) => {
     }
 }
 
+const  allStudents = async(req,res) => {
+    try {
+        const students = await student_Mdl.find()
+        if(students.length==0){
+            let resp = responseGenerator(true,"No Students joined yet...!!!!")
+            res.status(200).json(resp)
+        }
+        let resp = responseGenerator(true,"Here is the list of all the students ...!!!!",students)
+        res.status(200).json(resp)
+    } catch (err) {
+        console.log(err)
+        let resp = responseGenerator(false);
+        res.status(404).json(resp)
+    }
+}
 
 module.exports = {
     register,
@@ -215,6 +230,7 @@ module.exports = {
     createCenter,
     deleteUser,
     attedanceList,
+    allStudents,
     attedanceHistory,
     deleteAttendance,
     getallcenters,

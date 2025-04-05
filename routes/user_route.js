@@ -7,6 +7,8 @@ router.post("/signup",user_ctrl.signup)
 router.post("/login",user_ctrl.login)
 router.post("/attedance",user_ctrl.MarkAttendance)
 router.post("/addStudent",user_ctrl.createStudent)
+router.post("/studentAttendance",user_ctrl.StudentAttendance),
+router.get("/attendaceOfAllStudents",user_ctrl.attedanceOfAllStudents)
 // router.post("/attendance",user_ctrl.attendence)
 
 // router.post("/register",user_ctrl.register)
