@@ -36,6 +36,19 @@ const login = async(req,res) => {
 }
 
 
+const dashboard = async(req,res) => {
+    try {
+        const center = await center_Mdl.find()
+        const user = await user_Mdl.find()
+        res.status(200).json({center,user})
+    } catch (err) {
+        console.log(err)
+        let resp = responseGenerator(false);
+        res.status(404).json(resp)
+    }
+}
+
+
 const getUsersList = async(req,res) => {
     try {
         const users = await user_Mdl.find().populate("center","center location contact -_id")
@@ -236,5 +249,6 @@ module.exports = {
     getallcenters,
     getusersbyCenterid,
     getAllStudentsAtCenter,
-    getAllStudentsByTutor
+    getAllStudentsByTutor,
+    dashboard
 }
