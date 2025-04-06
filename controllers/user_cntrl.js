@@ -159,7 +159,22 @@ const attedanceOfAllStudents = async(req,res) => {
 }
 
 
-
+const attedanceHistoryOfStudent = async(req,res) => {
+    try {
+        const rollno = req.body.roll_no
+        const history = await studentAttendance_Mdl.find({roll_no:rollno})
+        if(history==0){
+            let resp = responseGenerator(true,"No attendance history of this student...!!!!")
+            res.status(400).json(resp)
+        }
+        let resp = responseGenerator(true,"Here is the list of attendace of this student...!!!!",history)
+        res.status(200).json(resp)
+    } catch (err) {
+        console.log(err);
+        let resp = responseGenerator(false);
+        res.status(404).json(resp)
+    }
+}
 
 module.exports = {
     login,
@@ -167,5 +182,6 @@ module.exports = {
     MarkAttendance,
     createStudent,
     StudentAttendance,
-    attedanceOfAllStudents
+    attedanceOfAllStudents,
+    attedanceHistoryOfStudent
 }

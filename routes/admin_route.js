@@ -15,6 +15,7 @@ router.get("/getUsersList",admin_cntrls.getUsersList)
 router.delete("/removeUser",admin_cntrls.deleteUser)
 router.get("/attendanceOfAllStudents",user_cntrl.attedanceOfAllStudents)
 router.get("/attendanceList",admin_cntrls.attedanceList)
+router.get("/attendanceHistoryOfStudent",user_cntrl.attedanceHistoryOfStudent)
 router.get("/attendanceHistory",admin_cntrls.attedanceHistory)
 router.delete("/deleteAttendance",admin_cntrls.deleteAttendance)
 
