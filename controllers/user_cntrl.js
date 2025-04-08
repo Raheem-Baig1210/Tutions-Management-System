@@ -17,15 +17,15 @@ const signup =async(req,res) => {
         if (existingUser) {
             throw new Error("Email Already exists in the list");
         }
-
         const centerExists = await center_Mdl.findOne({ center: data.center });
         console.log(centerExists)
         if (!centerExists) {
             throw new Error("Center Doesn't exist...!!! Please contact admin to create center ....!!!!");
         }
         
-
+        
         data.password=await hashPassword(data.password)
+        // data.documentpath = req.file.path
         const user = new user_Mdl(data)
         await user.save()
         let resp = responseGenerator(true,"User Added succesfully...!!!",user)

@@ -8,9 +8,11 @@ const user_schema = new schema(
         id : {type : Number, required: true},
         phno : {type : Number, required: true},
         email : {type : String,required: true},
+        password : {type: String, required : true},
         center : {type : mongoose.Schema.Types.ObjectId , required : true, ref : "center"},
         timing : {type: String ,required : true},
-        password : {type: String, required : true},
+        specialization: { type: String, required: true },
+        documentPath: { type: String, required: true }
     },
     {timestamps : true}
 )

@@ -48,6 +48,20 @@ const dashboard = async(req,res) => {
     }
 }
 
+const addCenter = async(req,res) => {
+    try {
+        const data = req.body
+        // data.centerImages = req.files.map(file => file.path)
+        const center = new center_Mdl(data)
+        await center.save();
+        let resp = responseGenerator(true, "Center created successfully ....!!!", center)
+        res.status(200).json(resp)
+    } catch (err) {
+        console.log(err);
+        let resp = responseGenerator(false);
+        res.status(404).json(resp)
+    }
+}
 
 const getUsersList = async(req,res) => {
     try {
@@ -98,19 +112,6 @@ const deleteUser = async(req,res) => {
     }
 }
 
-const createCenter = async(req,res) => {
-    try {
-        const data = req.body
-        const center = new center_Mdl(data)
-        await center.save();
-        let resp = responseGenerator(true, "Center created successfully ....!!!", center)
-        res.status(200).json(resp)
-    } catch (err) {
-        console.log(err);
-        let resp = responseGenerator(false);
-        res.status(404).json(resp)
-    }
-}
 
 
 const getallcenters = async(req,res) => {
@@ -209,7 +210,7 @@ const getAllStudentsByTutor = async(req,res) => {
         const students = await student_Mdl.find({tutor:t_id}).populate("tutor","name email")
         if(students.length==0){
             let resp = responseGenerator(true,"No Students under this tutor...!!!")
-            res.status(200).json(resp)
+            res.status(400).json(resp)
         }
         let resp = responseGenerator(true,"Here is the list of the students under  this tutor....!!!!",students)
         res.status(200).json(resp)
@@ -240,7 +241,7 @@ module.exports = {
     register,
     login,
     getUsersList,
-    createCenter,
+    addCenter,
     deleteUser,
     attedanceList,
     allStudents,
