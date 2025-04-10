@@ -3,7 +3,7 @@ const tutor_ctrl = require("../controllers/tutor_cntrl")
 
 const router = express.Router()
 
-// router.post("/signup",tutor_ctrl.signup)
+router.post("/signup",tutor_ctrl.signup)
 router.post("/login",tutor_ctrl.login)
 router.post("/markAttedance",tutor_ctrl.MarkAttendance)
 router.post("/addStudent",tutor_ctrl.createStudent)

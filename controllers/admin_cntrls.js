@@ -210,7 +210,7 @@ const getAllStudentsByTutor = async(req,res) => {
         const students = await student_Mdl.find({tutor:t_id}).populate("tutor","name email")
         if(students.length==0){
             let resp = responseGenerator(true,"No Students under this tutor...!!!")
-            res.status(400).json(resp)
+            res.status(404).json(resp)
         }
         let resp = responseGenerator(true,"Here is the list of the students under  this tutor....!!!!",students)
         res.status(200).json(resp)

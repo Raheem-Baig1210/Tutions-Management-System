@@ -17,16 +17,23 @@ const signup =async(req,res) => {
         if (existingUser) {
             throw new Error("Email Already exists in the list");
         }
-        const centerExists = await center_Mdl.findOne({ center: data.center });
+        const centerExists = await center_Mdl.findOne({ _id: data.center });
+        const allcenters = await center_Mdl.find()
+        console.log(allcenters  )
         console.log(centerExists)
         if (!centerExists) {
             throw new Error("Center Doesn't exist...!!! Please contact admin to create center ....!!!!");
         }
-        
+        let id = await tutor_Mdl.countDocuments()
+        id = id+1
+
         
         data.password=await hashPassword(data.password)
         // data.documentpath = req.file.path
-        const user = new tutor_Mdl(data)
+        const user = new tutor_Mdl({
+            ...data,
+            id
+        })
         await user.save()
         let resp = responseGenerator(true,"User Added succesfully...!!!",user)
         res.status(200).json(resp)
