@@ -1,5 +1,5 @@
 const admin_Mdl = require("../models/admin_model")
-const user_Mdl = require("../models/user_model")
+const tutor_Mdl = require("../models/tutor_model")
 const center_Mdl = require("../models/center_model")
 const attend_Mdl = require("../models/attend_model")
 const student_Mdl = require("../models/student_Model")
@@ -39,7 +39,7 @@ const login = async(req,res) => {
 const dashboard = async(req,res) => {
     try {
         const center = await center_Mdl.find()
-        const user = await user_Mdl.find()
+        const user = await tutor_Mdl.find()
         res.status(200).json({center,user})
     } catch (err) {
         console.log(err)
@@ -65,7 +65,7 @@ const addCenter = async(req,res) => {
 
 const getUsersList = async(req,res) => {
     try {
-        const users = await user_Mdl.find().populate("center","center location contact -_id")
+        const users = await tutor_Mdl.find().populate("center","center location contact -_id")
         let resp = responseGenerator(true,"Here is the List of users ...!!!",users)
         res.status(200).json(resp)
     } catch (err) {
@@ -79,7 +79,7 @@ const getUsersList = async(req,res) => {
 const getusersbyCenterid = async(req,res) => {
     try {
         const c_id = req.params.id;
-        const users = await user_Mdl.find({center: c_id}).populate("center","center location contact")
+        const users = await tutor_Mdl.find({center: c_id}).populate("center","center location contact")
         if(users.length==0){
             let resp = responseGenerator(false,"No users in this center ...!!!!");
             res.status(404).json(resp)
@@ -97,10 +97,10 @@ const getusersbyCenterid = async(req,res) => {
 const deleteUser = async(req,res) => {
     try {
         const user_email = req.body.email
-        const user =await user_Mdl.findOne({email:user_email})
+        const user =await tutor_Mdl.findOne({email:user_email})
         if(user){
-            await user_Mdl.deleteOne(user);
-            var resp = responseGenerator(true,"User deleted successfully ....!!!", user_Mdl);
+            await tutor_Mdl.deleteOne(user);
+            var resp = responseGenerator(true,"User deleted successfully ....!!!", tutor_Mdl);
             res.status(202).json(resp)
         }else{
             throw new Error("User doesnt exist with this email ...!!!!")

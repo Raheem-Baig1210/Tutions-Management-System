@@ -1,4 +1,4 @@
-const user_Mdl = require("../models/user_model")
+const tutor_Mdl = require("../models/tutor_model")
 const center_Mdl = require("../models/center_model")
 const student_Mdl = require("../models/student_Model")
 const attend_Mdl = require("../models/attend_model")
@@ -13,7 +13,7 @@ const studentsAttend_Model = require("../models/studentsAttend_Model")
 const signup =async(req,res) => {
     try {
         const data = req.body
-        const existingUser = await user_Mdl.findOne({ email: data.email });
+        const existingUser = await tutor_Mdl.findOne({ email: data.email });
         if (existingUser) {
             throw new Error("Email Already exists in the list");
         }
@@ -26,7 +26,7 @@ const signup =async(req,res) => {
         
         data.password=await hashPassword(data.password)
         // data.documentpath = req.file.path
-        const user = new user_Mdl(data)
+        const user = new tutor_Mdl(data)
         await user.save()
         let resp = responseGenerator(true,"User Added succesfully...!!!",user)
         res.status(200).json(resp)
@@ -44,7 +44,7 @@ const signup =async(req,res) => {
 const login = async(req,res) => {
     try {
         const {email,password} = req.body
-        const user = await user_Mdl.findOne({email}).lean()
+        const user = await tutor_Mdl.findOne({email}).lean()
         if(user){
             const isPasswordMatches = comparePassword(password,user.password)
             if(isPasswordMatches){
