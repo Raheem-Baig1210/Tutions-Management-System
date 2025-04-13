@@ -12,7 +12,7 @@ const user_schema = new schema(
         center : {type : mongoose.Schema.Types.ObjectId , required : true, ref : "center"},
         timing : {type: String ,required : true},
         specialization: { type: String, required: true },
-        // documentPath: { type: String, required: true }
+        documentPath: { type: String, required: true }
     },
     {timestamps : true}
 )

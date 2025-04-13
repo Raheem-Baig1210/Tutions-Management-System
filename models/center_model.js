@@ -11,7 +11,7 @@ const center_schema = new schema(
         postalCode:{type:Number,required:true},
         contactPerson:{type:String,required:true},
         contactNumber : {type : Number, required: true},
-        centerImages:{type:[String], required:true}
+        // centerImages:{type:[String], required:true}
     },
     {timestamps: true}
 )

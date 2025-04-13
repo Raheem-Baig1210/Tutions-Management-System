@@ -18,9 +18,9 @@ const signup =async(req,res) => {
             throw new Error("Email Already exists in the list");
         }
         const centerExists = await center_Mdl.findOne({ _id: data.center });
-        const allcenters = await center_Mdl.find()
-        console.log(allcenters  )
-        console.log(centerExists)
+        // const allcenters = await center_Mdl.find()
+        // console.log(allcenters  )
+        // console.log(centerExists)
         if (!centerExists) {
             throw new Error("Center Doesn't exist...!!! Please contact admin to create center ....!!!!");
         }
