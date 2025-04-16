@@ -32,7 +32,7 @@ const isAdmin = (req,res,next) => {
 
 
 
-router.post("/signup",tutor_ctrl.signup)
+// router.post("/signup",tutor_ctrl.signup)
 router.post("/login",tutor_ctrl.login)
 router.post("/markAttedance",isLoggedIn,tutor_ctrl.MarkAttendance)
 router.post("/addStudent",isLoggedIn,tutor_ctrl.createStudent)
