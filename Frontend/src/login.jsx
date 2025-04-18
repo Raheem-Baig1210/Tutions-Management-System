@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify"; // import toast
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const Login = () => {
@@ -22,8 +24,19 @@ const Login = () => {
         try {
           const response = await axios.post('http://localhost:5001/admin/login', formValues);
           navigate("/admin-dashboard")
+        // if (response.data.success) {
+        //     // If login successful
+        //     toast.success("Login successful!", { position: "top-center" });
+        //     setTimeout(() => {
+        //         navigate("/admin-dashboard");
+        //     }, 1500); // Navigate after 1.5 sec
+        // } else {
+        //     // If success is false
+        //     toast.error(response.data.message || "Invalid credentials!", { position: "top-center" });
+        // }
           console.log(response.data);
         } catch (error) {
+            alert("Invalid Email or Password....!!!")
           console.error('Error sending data:', error);
         }
       };

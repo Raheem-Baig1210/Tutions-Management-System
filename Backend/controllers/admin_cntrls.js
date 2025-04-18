@@ -10,9 +10,11 @@ const { responseGenerator,hashPassword,comparePassword,generateTokens } = requir
 const login = async(req,res) => {
     try {
         const { email,password } = req.body;
+        // console.log(email,password)
         const admin = await admin_Mdl.findOne({email}).lean()
         if(admin){
-            const isPasswordMatches = comparePassword(password,admin.password);
+            const isPasswordMatches =await comparePassword(password,admin.password);
+            // console.log(password,admin.password)
             if(isPasswordMatches){
                 const tokens = generateTokens({email, name:admin.name, id:admin.id,})
                 res.status(200).json({
@@ -24,14 +26,16 @@ const login = async(req,res) => {
                         tokens
                     }
                 })
+            }else{
+                res.status(401).json({ success: false, message: "Invalid password...!!!" })
             }
         }else{
-        res.status(401).json({success: false, message: "Invalid email or password ....!!!!"})
+        res.status(401).json({success: false, message: "Invalid email ....!!!!"})
         }
     } catch (err) {
         console.log(err)
-        let resp = responseGenerator(false);
-        res.status(404).json(resp)
+        let resp = responseGenerator(false, "Server Error");
+        res.status(500).json(resp)
     }
 }
 
@@ -176,6 +180,7 @@ const register = async(req,res) => {
     try {
         const data = req.body;
         const admin = new admin_Mdl(data);
+        admin.password = await hashPassword(admin.password)
         await admin.save();
         let resp = responseGenerator(true, "Admin successfully created ...!!!!",admin)
         res.status(200).json(resp)
