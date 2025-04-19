@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-rou
 import './App.css'
 import Login from './login'
 import AdminDashboard from "./LandingPages/Admin/AdminDashboard"
+import Centers from './LandingPages/Admin/Center';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     <Routes>
     <Route path='/' element={<Login/>}></Route>
     <Route path='/admin-dashboard' element={<AdminDashboard/>}></Route>
+    <Route path='/centers' element={<Centers/>}></Route>
     </Routes>
     </BrowserRouter>
   )
