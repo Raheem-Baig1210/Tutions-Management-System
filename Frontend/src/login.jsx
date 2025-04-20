@@ -53,7 +53,7 @@ const Login = () => {
     // }
 
     return (
-        <div className="border rounded-[3%] ml-118 mt-30 bg-gray-400 w-[40%] h-120 text-center">
+        <div className="border rounded-[3%] ml-118 mt-30 bg-gray-300 w-[40%] h-120 text-center">
             <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
                 <div className="relative z-0 w-full mb-5 group pt-23">
                     <label

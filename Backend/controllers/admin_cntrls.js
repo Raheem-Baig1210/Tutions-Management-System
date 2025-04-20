@@ -79,6 +79,18 @@ const getUsersList = async(req,res) => {
     }
 }
 
+const centerByCenterid = async (req,res) => {
+    try {
+        const c_id=req.params.id
+        const center = await center_Mdl.findById({_id: c_id})
+        let resp = responseGenerator(true,"here is the center info...!!!",center)
+        res.status(200).json(resp)
+    } catch (err) {
+        console.log(err);
+        let resp = responseGenerator(false);
+        res.status(500).json(resp)
+    }
+}
 
 const getusersbyCenterid = async(req,res) => {
     try {
@@ -256,5 +268,6 @@ module.exports = {
     getusersbyCenterid,
     getAllStudentsAtCenter,
     getAllStudentsByTutor,
-    dashboard
+    dashboard,
+    centerByCenterid
 }

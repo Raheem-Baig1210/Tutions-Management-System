@@ -1,7 +1,12 @@
+// import React,{useState} from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
+// import axios from "axios";
+// import { useState } from "react";
 
 const Dashboard = () => {
+   
+
     const navigate = useNavigate()
     const handleLogout = () => {
         navigate('/');
@@ -20,11 +25,22 @@ const Dashboard = () => {
                     <hr />
                     <h3 className="text-2xl mt-4 ml-4 mb-2 font-normal">Centers</h3>
                     <div className="flex gap-4">
-                        <div className="w-100 h-50">center1</div>
-                        <div className="w-100 h-50">center2</div>
-                        <div className="w-100 h-50">center3</div>
+                        <div className="relative w-80 h-70 ">
+                            <img src="/media/cntr5.jpg" 
+                                alt="Center Image" 
+                                className="absolute inset-0 w-full h-full object-cover object-center" />
+                            <button className="mt-75 ml-25 hover:bg-gray-300 transition-all duration-250 ease-in-out cursor-pointer border rounded h-10 w-30">Center1</button>
+                        </div>
+                        <div className="relative w-80 h-70 "><img src="/media/cntr3.jpg" 
+                                alt="Center Image" 
+                                className="absolute inset-0 w-full h-full object-cover object-center" />
+                            <button className="mt-75 ml-25 hover:bg-gray-300 transition-all duration-250 ease-in-out cursor-pointer border rounded h-10 w-30">Center2</button></div>
+                        <div className="relative w-80 h-70 "><img src="/media/cntr2.jpg" 
+                                alt="Center Image" 
+                                className="absolute inset-0 w-full h-full object-cover object-center" />
+                            <button className="mt-75 ml-25 hover:bg-gray-300 transition-all duration-250 ease-in-out cursor-pointer border rounded h-10 w-30">center3</button></div>
                     </div>
-                    <h3 className="text-2xl mt-4 ml-4 mb-2 font-normal">Tutors Attendence</h3>
+                    <h3 className="text-2xl mt-20 ml-4 mb-2 font-normal">Tutors Attendence</h3>
                     <div className="flex flex-col gap-4">
                         <div className="w-100 h-30">Tutor1</div>
                         <div className="w-100 h-30">Tutor2</div>
