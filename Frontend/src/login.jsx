@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify"; // import toast
+// import { ToastContainer, toast } from "react-toastify"; // import toast
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
@@ -24,16 +24,6 @@ const Login = () => {
         try {
           const response = await axios.post('http://localhost:5001/admin/login', formValues);
           navigate("/admin-dashboard")
-        // if (response.data.success) {
-        //     // If login successful
-        //     toast.success("Login successful!", { position: "top-center" });
-        //     setTimeout(() => {
-        //         navigate("/admin-dashboard");
-        //     }, 1500); // Navigate after 1.5 sec
-        // } else {
-        //     // If success is false
-        //     toast.error(response.data.message || "Invalid credentials!", { position: "top-center" });
-        // }
           console.log(response.data);
         } catch (error) {
             alert("Invalid Email or Password....!!!")
@@ -41,19 +31,11 @@ const Login = () => {
         }
       };
 
-    // const handleSubmit  = () => {
-    //     if(formValues.email && formValues.password){
-    //         // setLoading(true);
-    //         <div>
-    //             <h1>LoggedIn successfully...!!!!</h1>
-    //         </div>
-    //     }else{
-    //         alert("Please fill all the fields...!!!")
-    //     }
-    // }
 
     return (
+        // <h1>Admin Login</h1>
         <div className="border rounded-[3%] ml-118 mt-30 bg-gray-300 w-[40%] h-120 text-center">
+        <h1 className="text-3xl mt-10 ">Admin Login</h1>
             <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
                 <div className="relative z-0 w-full mb-5 group pt-23">
                     <label

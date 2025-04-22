@@ -22,7 +22,7 @@ const login = async(req,res) => {
                     success : true,
                     data : {
                         name : admin.name,
-                        id : admin.id,
+                        id : admin._id,
                         tokens
                     }
                 })
